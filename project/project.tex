@@ -1,0 +1,74 @@
+\documentclass[a4paper, fleqn]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem}
+\usepackage{lastpage}
+\usepackage{stmaryrd}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{csquotes}
+\usepackage{xfrac}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{titlesec}
+\usepackage[title]{appendix}
+\usepackage{fancyhdr}
+\usepackage[font=small, labelfont=bf]{caption}
+\usepackage[english]{babel}
+\usepackage{sectsty}
+\usepackage{url, lipsum}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\setlength{\mathindent}{20mm}
+
+
+\newcommand{\reason}[1]{\text{\textcolor{blue}{$\langle$ #1 $\rangle$}}}
+\newcommand{\num}[1]{\text{\textcolor{red}{(#1)}}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\setlength\headheight{15pt}
+\fancyhead[L]{}
+\fancyhead[R]{\rightmark}
+\fancyfoot[R]{Page~\thepage~of~\pageref{LastPage}}
+
+\begin{document}
+
+\title{\normalsize \textsc{FINS4972}
+        \\ [2.0cm]
+		\rule{\linewidth}{0.5pt} \\
+        \LARGE \textbf{\uppercase{Research Project \\
+		\normalsize Sub-title}
+		\rule{\linewidth}{2pt} \\ [0.5cm]
+\normalsize \today \vspace*{5\baselineskip}}}
+
+\date{}
+\author{Charlie Bradford \\
+		\texttt{z5114682}
+		\and
+		Name \\
+		\texttt{z5555555}
+		}
+
+
+\vspace{2 in}
+\maketitle
+\section*{Executive Summary}
+
+\tableofcontents\clearpage
+\section{Background}
+\section{Methodology}
+\section{Results}
+\section{Discussion}
+\section{Conclusion}
+
+
+
+\end{document}
