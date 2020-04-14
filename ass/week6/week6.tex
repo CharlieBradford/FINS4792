@@ -1,0 +1,124 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{stmaryrd}
+\usepackage{xfrac}
+\lstset{language=C}
+\usepackage[latin1]{inputenc}
+
+\newcommand{\ansline}{\begin{center}\rule{8cm}{0.4pt}\end{center}}
+
+\title{}
+\author{Charlie Bradford}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+  \item \textbf{Deriving a competitive LOB.} Consider the model developed in section 6.2.3.
+    We make the following parametric assumptions:
+    \begin{enumerate}[label={(\roman*)}]
+      \item The trader who arrives in period 1 knows the final value of the security v with
+probability $\pi$. Otherwise, he is uninformed.
+      \item If the trader who arrives in period 1 is uninformed, he buys or sells (with equal probability) a 
+        number of shares $x$ that has an exponential distribution with parameter $\theta$. That is, 
+        the size distribution of the market order submitted by an uninformed trader arriving in period 2 is 
+        $f(x) = \frac{1}{2}\theta e^{-\theta |x|}$
+      \item The final value of the security in period 2 has the following probability distribution:
+        \[g(v) = \frac{1}{2\sigma}\exp{\left(-\frac{|v-\mu|}{\sigma}\right)}.\]
+      \item The tick size is nil $\left(\Delta = 0\right)$.
+    \end{enumerate}
+    Assumption 3 implies that $\sigma$ is the mean absolute deviation of $v$ and 
+    $E[v | v \geq z] = z + \sigma$.
+    \begin{enumerate}
+      \item Let $Y(A)$ be the cumulative depth up to ask price $A$ in the book and $A*$ be
+        the lowest ask price in the LOB\@. Show that when $v\geq A*$ the optimal strategy of
+        the informed trader is to buy $Y (v)$ shares.
+      \item Using this observation and the zero profit condition (6.13), show that in equilibrium:
+        \[Y(A) = \frac{1}{\theta}\left[\ln{\left(\frac{1-\pi}{\pi}\right)}+\ln{\left(\frac{A-\mu}{\sigma}\right)} + \frac{A-\mu}{\sigma}\right]\text{ if } A > A*\]
+      \item Show that the book becomes thinner on the ask side when (i) $\pi$ increases or (ii) $\sigma$ increases. 
+        What is the economic intuition for this result?
+    \end{enumerate}
+    \ansline
+    \begin{enumerate}
+      \item The optimal strategy is to buy any shares at or below the true value $v$. To do this one must buy $Y(v)$ shares.
+      \item Consider the inverse of $Y$, $A$, a function that maps quote sizes to ask prices, this must naturally follow the pattern $A(y) = E[v|q \geq y]$. 
+        I.e. the expected price that has a quote side of $y$ is the expected value of the asset, given a quotesize greater than or equal to $y$.
+        To define $A
+
+
+      \item 
+    \end{enumerate}
+    \ansline
+  \item \textbf{Time priority vs.\ random tie-breaking rule.} Consider example 2 in section 6.2.3 but 
+    assume that the tick size $\Delta$ is strictly positive, such that
+    \[A_1 = \mu + \Delta < \mu + \sigma < \mu + 2\Delta\]
+    Time priority is enforced as in the baseline model of section 6.2.3.
+    \begin{enumerate}
+      \item Explain why the LOB will feature at least $q_L$ shares offered at price $A_2$.
+      \item Let $Y_1$ be the number of shares offered at price $A_1$. Define $r = \frac{\sigma}{\Delta}$. 
+        Observe that $r \in [1,2]$. Using the assumptions regarding the order flow at time 1, show that:
+        \begin{enumerate}
+          \item $Y_1 = 0$ iff $\frac{(r-1)\pi}{1-\pi} \geq 1$.
+          \item $Y_1 = q_S$ iff $\frac{(r-1)\pi}{1-\pi} \in [1-\psi, 1)$.
+          \item $Y_1 = q_L$ iff $\frac{(r-1)\pi}{1-\pi} \in [0,  1-\psi)$.
+        \end{enumerate}
+      \item Why does $Y_1$ decrease with $\pi$?
+      \item Now assume that $\frac{(r-1)\pi}{1-\pi}$ and suppose that time priority is not enforced any more. 
+        Instead, if two traders post a limit order at price $A_1$, then the offer that is executed first is determined 
+        randomly. Specifically, the limit order posted by trader $j\in \{1, 2\}$ is executed first with probability 0.5. Let $Y_1^j$ be the 
+        number of shares offered by trader $j \in \{1, 2\}$ at price $A_1$. Explain why, in equilibrium, $Y_1^1$ and $Y_1^2$ must satisfy the 
+        following conditions for $j = 1$ and $j=2$:
+        \[\left(A_1-E\left[v|q \geq Y_1^j\right]\right)P(q\geq Y_1^j) + (A_1 - E[v|q \geq Y_1^1 + Y_1^2])P(q \geq Y_1^1 + Y_1^2)\]
+        with a strict inequality if $Y_1^1 = Y_1^2= 0$.
+      \item Suppose that $q_L = 2q_S$. Deduce that $Y_1^1 = Y_1^2 = q_S$ form an equilibrium if:
+        \[\frac{(r-1)\pi}{1-\pi} \in \left[(1-\psi), \frac{1 + (1-\psi)}{2}\right],\]
+          when the ``random'' tie-breaking rule is used.
+        \item Why is cumulative depth greater when the random tie-breaking rule is used for 
+        $\frac{(r-1)\pi}{1-\pi} \in \left[1-\psi, \frac{1+(1-\psi)}{2}\right]$
+      \end{enumerate}
+    \item \textbf{Time priority vs.\ pro-rata allocation.} Consider the model developed in
+      section 6.2.2 and suppose $C<A_1 - v_0$. The size of the incoming market order (in absolute value) has a uniform 
+      distribution on $[0, Q]$, that is,
+      \[F(q) = \frac{q}{Q}.\]
+      \begin{enumerate}
+        \item Show that in this case the cumulative depth at price Ak is:
+          \[Y_k = Q\left(1-\frac{C}{A_k - \mu}\right), \forall k.\]
+        \item Now suppose that instead of time priority, a pro-rata allocation rule is used, as described in section 6.3.2. 
+          Further assume that $A_1 - \mu > 2C$. Then show that the cumulative depth at price $A_1$ is $Y_1^r = \frac{(A_1 - \mu)Q}{2C}$.
+        \item Why does the pro-rata allocation rule yield greater cumulative depth at all ask prices?
+      \end{enumerate}
+    \item Competition among specialists and liquidity. Consider the model of section 
+      6.3.3 and assume that two specialists can stop out a market order. When a market 
+      order arrives, they post a stop-out price at which they are ready to fill. The specialist
+      with the more competitive price executes. If there is a tie, the order is split equally
+      between the two specialists.
+      \begin{enumerate}
+        \item Show that if
+          \[\frac{q_L}{q_S} > 1 + \frac{\pi}{(1-\pi)(1-\psi)},\]
+          then, in equilibrium, the offers in the LOB are as described by equations (6.25) and (6.26), and the 
+          specialists stop out the small orders at a price (bid or ask) equal to $\mu$.
+        \item In this case, do the specialists improve liquidity?
+      \end{enumerate}
+    \item  \textbf{Make/take fees and bid-ask spreads.} Consider the model of section 6.4.1
+      with $\sigma= 0$ and $\tau = 1$. As Chapter 7 explains, trading platforms often charge
+      different fees for market and limit orders. Let $f_{mo}$ be the fee per share paid by a
+      market order placer and $f_{lo}$ the fee per share for a limit order placer when the limit
+      order executes (there is no entry fee for limit orders). Finally let $f$ be the total fee
+      earned by the platform on each trade, $f = f_{mo} + f_{lo}$.
+      \begin{enumerate}
+        \item Compute bid and ask quotes in equilibrium.
+        \item Show that the bid-ask spread decreases in $f_{mo}$ and increases in $f_{lo}$. Explain.
+        \item Trading platforms often subsidize traders who submit limit orders. That is, they set $f_{lo} < 0$ and $f_{mo} > 0$, maintaining 
+          that this practice ultimately helps to narrow the spread and benefits traders submitting market orders. Holding the total
+          trading fee fixed, is this argument correct?
+      \end{enumerate}
+\end{enumerate}
+\end{document}
